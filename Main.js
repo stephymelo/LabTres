@@ -9,6 +9,12 @@ let ancho;
 let alto;
 
 
+
+let Fig
+
+
+
+
 let fila;
 let col;
 
@@ -32,6 +38,7 @@ function draw (){
             
          } else {
             
+
             
             }
     

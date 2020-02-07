@@ -10,10 +10,14 @@ class Figura{
     
   
   }
+
+  
 pintarFigura(){
 
     
 }
+
+
 getPosY() {
 
     return this.posY;
