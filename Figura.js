@@ -1,4 +1,4 @@
-Figura()
+
 
 class Figura{
 
