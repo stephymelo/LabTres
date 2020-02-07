@@ -1,0 +1,7 @@
+Figura()
+
+class Figura{
+
+}
+
+
