@@ -4,7 +4,7 @@ let posY;
  
 
 class Figura{
-  constructor(){
+  constructor(posX, posY){
     this.posY;
     this.posX; 
     
