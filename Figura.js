@@ -1,20 +1,15 @@
-
-let posX;
-let posY;
- 
-
 class Figura{
-  constructor(posX, posY){
-    this.posY;
-    this.posX; 
-    
+
   
+  constructor (posX, posY){
+    this.posY = posY;
+    this.posX = posX; 
   }
 
   
 pintarFigura(){
-
-    
+  fill(0,0,0);
+        ellipse(this.posX,this.posY,30,30);
 }
 
 
@@ -32,7 +27,7 @@ setPosY(posY) {
 
     this.posY = posY;
 }
-setPosX() {
+setPosX(posX) {
     this.posX = posX;
 }
 
