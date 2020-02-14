@@ -6,10 +6,10 @@ class Cuadrado extends Figura {
 
 
     pintarFigura(){
-
-        fill(0,0,0);
-       rectMode(Center);
-       rect(this.posX,this.posY,30,30);
+        textSize(50);
+        fill(0);
+        text("X",this.posX,this.posY);
+      
        
 
     }

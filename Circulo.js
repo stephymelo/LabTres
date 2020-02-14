@@ -6,9 +6,9 @@ class Circulo extends Figura {
  
 
     pintarFigura(){
-
+        textSize(100);
         fill(0,0,0);
-        ellipse(this.posX,this.posY,30,30);
+        text("O",this.posX,this.posY);
         
     }
 
