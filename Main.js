@@ -21,13 +21,12 @@ function setup(){
  jugador = 1;
  ganadorX=false;
  ganadorO=false;
- noJugarmas=true;
  fila=3;
  col=3;
  tam = 200;
  figuritas=[];
  turno=1;
- reset=false;
+
 
 }
 
@@ -87,34 +86,25 @@ veriGanadorDiag();
 
 if(ganadorX){
    fill(255);
+   textSize(20);
    text("ganador X",320,630);
    noJugarmas=false;
 
 }
 if(ganadorO){
    fill(255);
+   textSize(20);
    text("ganador O",320,630);
    noJugarmas=false;
 }
 
-if(!noJugarmas){
-   text("playagain",200,630);
-}
 
- if(reset){
-      for (let i = 0; i < figuritas.length; i++) {
-      figuritas.splice(i);
-     } 
+ 
    
-     for (i = 0; i < fila; i++) {
-      for (j = 0; j < col; j++) {
-         matriz[i][j] = 0;
-      }
-   }
    
   
 
-} 
+
   
 }
 
@@ -129,16 +119,14 @@ function mousePressed(){
             if(mouseX > i*tam && mouseX < (i*tam)+tam && mouseY > j*tam && mouseY < (j*tam)+tam){
                matriz[i][j] = jugador;
                reset=false;
-               noJugarmas=true;
+               
          
             }
          }
       }
    }
    
-if(dist(mouseX,mouseY,200,630)<100){
-   reset=true;
-}
+
 
 }
 
