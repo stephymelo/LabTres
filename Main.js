@@ -26,6 +26,7 @@ function setup(){
  tam = 200;
  figuritas=[];
  turno=1;
+ noJugarmas=true; 
 
 
 }
