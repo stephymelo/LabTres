@@ -10,15 +10,25 @@ let figuritas;
 let fila;
 let col;
 let tam;
+let turno;
+let ganadorX;
+let ganadorO;
+let noJugarmas;
+let reset;
 
 function setup(){
  createCanvas(650,650);
  jugador = 1;
- cambiarTurno = false;
+ ganadorX=false;
+ ganadorO=false;
+ noJugarmas=true;
  fila=3;
  col=3;
  tam = 200;
  figuritas=[];
+ turno=1;
+ reset=false;
+
 }
 
 
@@ -33,15 +43,20 @@ function draw (){
             fill(255);
              break;
              case 1:
-               figuritas.push(new Cuadrado((i*tam)+50, (j*tam)+100));
+                if(noJugarmas){
+                  figuritas.push(new Cuadrado((i*tam)+50, (j*tam)+100));
+                }
+              
                
              break;
              case 2:
-               figuritas.push(new Circulo((i*tam)+50, (j*tam)+100));
+                if(noJugarmas){
+                  figuritas.push(new Circulo((i*tam)+50, (j*tam)+100));
+                }
+               
                
              break;
-       
-         
+     
        }
        fill(255);
 
@@ -53,63 +68,196 @@ function draw (){
    }
 
 
+
    for (let i = 0; i < figuritas.length; i++) {
-      figuritas[i].pintarFigura();
+      if (turno % 2 == 0) {
+         figuritas[i].pintarFigura();
+         jugador=2;
+
+      }else{
+         figuritas[i].pintarFigura();
+         jugador=1;
+      }
 
    }
 
-//veriGanador();
+veriGanadorCol();
+veriGanadorFila();
+veriGanadorDiag();
 
+if(ganadorX){
+   fill(255);
+   text("ganador X",320,630);
+   noJugarmas=false;
+
+}
+if(ganadorO){
+   fill(255);
+   text("ganador O",320,630);
+   noJugarmas=false;
+}
+
+if(!noJugarmas){
+   text("playagain",200,630);
+}
+
+ if(reset){
+      for (let i = 0; i < figuritas.length; i++) {
+      figuritas.splice(i);
+     } 
+   
+     for (i = 0; i < fila; i++) {
+      for (j = 0; j < col; j++) {
+         matriz[i][j] = 0;
+      }
+   }
+   
+  
+
+} 
   
 }
 
 
 function mousePressed(){
 
-   let cambiar = false;
+  turno++;
 
    for (i = 0; i < fila; i++) {
       for (j = 0; j < col; j++) {
          if(matriz[i][j] == 0){
             if(mouseX > i*tam && mouseX < (i*tam)+tam && mouseY > j*tam && mouseY < (j*tam)+tam){
-               
                matriz[i][j] = jugador;
-               
-   
+               reset=false;
+               noJugarmas=true;
+         
             }
-
-
-           if(!cambiarTurno){
-              jugador=2;
-           }else{
-              jugador=1;
-           }
-
-
          }
       }
-      
-      //console.log(jugador+"");
    }
+   
+if(dist(mouseX,mouseY,200,630)<100){
+   reset=true;
+}
 
 }
 
-function veriGanador(){
+function veriGanadorCol(){
  
-   textSize(20);
-   //columnas
+
    for (i = 0; i < fila; i++) {
       for (j = 0; j < col; j++) {
-         if((matriz[0][0] == matriz[0][1] ==matriz[0][2]) == 1 ){
-
-            //fill(222,0,0);
-            text("ganador",300,300);
+         if((matriz[0][0] == matriz[0][1] && matriz[0][0]==matriz[0][2]&&matriz[0][2] ==matriz[0][1]) ){
+            if(matriz[0][0] == 1){
+               ganadorX=true;
+               return 1;
+               
+            }else if(matriz[0][0] == 2){
+               ganadorO=true;
+               return 2;
+            }
           }
+       
+       if((matriz[1][0] == matriz[1][1] && matriz[1][0]==matriz[1][2]&&matriz[1][2] ==matriz[1][1]) ){
+            if(matriz[1][0] == 1){
+               ganadorX=true;
+               return 1;
+               
+            }else if(matriz[1][0] == 2){
+               ganadorO=true;
+               return 2;
+            }
+          }
+      
+          if((matriz[2][0] == matriz[2][2] && matriz[2][1]==matriz[2][2]&&matriz[2][2] ==matriz[2][1]) ){
+            if(matriz[2][0] == 1){
+               ganadorX=true;
+               return 1;
+               
+            }else if(matriz[2][0] == 2){
+               ganadorO=true;
+               return 2;
+            }
+          }
+      
+
+
 
       }
    }
 }
 
+function veriGanadorFila(){
+ 
+   for (i = 0; i < fila; i++) {
+      for (j = 0; j < col; j++) {
+         if((matriz[0][0] == matriz[1][0] && matriz[0][0]==matriz[2][0]&&matriz[2][0] ==matriz[1][0]) ){
+            if(matriz[0][0] == 1){
+               ganadorX=true;
+               return 1;
+               
+            }else if(matriz[0][0] == 2){
+               ganadorO=true;
+               return 2;
+            }
+          }
+       
+       if((matriz[0][1] == matriz[1][1] && matriz[0][1]==matriz[2][1]&&matriz[2][1] ==matriz[1][1]) ){
+            if(matriz[0][1] == 1){
+               ganadorX=true;
+               return 1;
+               
+            }else if(matriz[0][1] == 2){
+               ganadorO=true;
+               return 2;
+            }
+          }
+      
+          if((matriz[0][2] == matriz[1][2] && matriz[2][2]==matriz[1][2]&&matriz[2][2] ==matriz[0][2]) ){
+            if(matriz[0][2] == 1){
+               ganadorX=true;
+               return 1;
+               
+            }else if(matriz[0][2] == 2){
+               ganadorO=true;
+               return 2;
+            }
+          }
+      
+
+
+
+      }
+   }
+}
+
+
+function veriGanadorDiag () {
+
+   if((matriz[0][0] == matriz[1][1] && matriz[1][1]==matriz[2][2]&&matriz[2][2] ==matriz[0][0]) ){
+      if(matriz[0][0] == 1){
+         ganadorX=true;
+         return 1;
+         
+      }else if(matriz[0][0] == 2){
+         ganadorO=true;
+         return 2;
+      }
+    }
+
+    if((matriz[0][2] == matriz[1][1] && matriz[1][1]==matriz[2][0]&&matriz[2][0] ==matriz[0][2]) ){
+      if(matriz[0][2] == 1){
+         ganadorX=true;
+         return 1;
+         
+      }else if(matriz[0][2] == 2){
+         ganadorO=true;
+         return 2;
+      }
+    }
+
+
+}
 
 
 
